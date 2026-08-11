@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taciane Evangelista — hub pessoal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e13;
+    --bg-soft:#0f151c;
+    --panel:#131b23;
+    --panel-2:#0d1319;
+    --line:#232e38;
+    --text:#e7edf2;
+    --muted:#8697a3;
+    --a:#5ee6a0; /* Adenina - verde */
+    --t:#ff7a7a; /* Timina - vermelho */
+    --g:#f5c14f; /* Guanina - amarelo */
+    --c:#6fb3ff; /* Citosina - azul */
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3, .mono{ font-family:'IBM Plex Mono', monospace; }
+  ::selection{ background:var(--a); color:#08120d; }
+
+  a{ color:inherit; }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px;
+    background:rgba(10,14,19,0.75);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+  }
+  nav .brand{ color:var(--text); font-weight:600; letter-spacing:0.5px; }
+  nav .brand span{ color:var(--a); }
+  nav ul{ list-style:none; display:flex; gap:22px; margin:0; padding:0; }
+  nav ul li a{ text-decoration:none; color:var(--muted); display:flex; align-items:center; gap:7px; transition:color .2s;}
+  nav ul li a:hover{ color:var(--text); }
+  .dot{ width:7px; height:7px; border-radius:50%; display:inline-block; }
+  .dot.a{background:var(--a);} .dot.t{background:var(--t);} .dot.g{background:var(--g);} .dot.c{background:var(--c);}
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    min-height:100svh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    position:relative;
+    padding:120px 20px 60px;
+  }
+  .basepair-ticker{
+    position:absolute; top:0; left:0; width:100%;
+    white-space:nowrap; overflow:hidden;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:15px; letter-spacing:6px;
+    opacity:0.35;
+    padding-top:70px;
+  }
+  .basepair-ticker span{ display:inline-block; animation:scroll-left 40s linear infinite; }
+  @keyframes scroll-left{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  .baseA{color:var(--a);} .baseT{color:var(--t);} .baseG{color:var(--g);} .baseC{color:var(--c);}
+
+  .hero-eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--a);
+    letter-spacing:2px; margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(32px, 6vw, 64px);
+    line-height:1.15; margin:0 0 18px; font-weight:700;
+    max-width:900px;
+  }
+  .hero h1 .cursor{
+    display:inline-block; width:0.5em; background:var(--a);
+    animation:blink 1s steps(1) infinite; margin-left:4px;
+  }
+  @keyframes blink{ 50%{opacity:0;} }
+  .hero p{
+    max-width:560px; color:var(--muted); font-size:16px; line-height:1.7;
+    margin:0 0 34px;
+  }
+  .hero .cta{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+  .btn{
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    padding:12px 22px; border-radius:999px; border:1px solid var(--line);
+    background:var(--panel); color:var(--text); cursor:pointer;
+    text-decoration:none; transition:all .2s;
+  }
+  .btn:hover{ border-color:var(--a); color:var(--a); transform:translateY(-1px); }
+  .btn.solid{ background:var(--a); color:#08120d; border-color:var(--a); font-weight:600;}
+  .btn.solid:hover{ opacity:0.85; color:#08120d; }
+
+  .scroll-cue{
+    position:absolute; bottom:28px; font-family:'IBM Plex Mono', monospace;
+    font-size:11px; color:var(--muted); display:flex; flex-direction:column; align-items:center; gap:6px;
+  }
+  .scroll-cue .line{ width:1px; height:26px; background:linear-gradient(var(--a), transparent); animation:pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{opacity:.3;} 50%{opacity:1;} }
+
+  section{ padding:100px 24px; max-width:1080px; margin:0 auto; position:relative; }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--muted);
+    letter-spacing:2px; text-transform:uppercase; margin-bottom:10px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{ content:''; width:22px; height:1px; background:var(--line); }
+  h2.title{ font-size:clamp(24px,4vw,36px); margin:0 0 40px; }
+
+  /* ---------- ABOUT (README) ---------- */
+  .readme{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .readme .titlebar{
+    display:flex; align-items:center; gap:8px; padding:12px 16px;
+    background:var(--panel-2); border-bottom:1px solid var(--line);
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--muted);
+  }
+  .titlebar .tf{ width:10px; height:10px; border-radius:50%; }
+  .titlebar .tf.r{background:var(--t);} .titlebar .tf.y{background:var(--g);} .titlebar .tf.gr{background:var(--a);}
+  .readme-body{ display:grid; grid-template-columns:200px 1fr; gap:0; }
+  @media (max-width:640px){ .readme-body{ grid-template-columns:1fr; } }
+  .slide{
+    padding:26px; display:flex; align-items:center; justify-content:center;
+    border-right:1px solid var(--line);
+  }
+  @media (max-width:640px){ .slide{ border-right:none; border-bottom:1px solid var(--line);} }
+  .slide-frame{
+    width:140px; height:140px; border-radius:50%;
+    background:conic-gradient(from 180deg, var(--a), var(--c), var(--g), var(--t), var(--a));
+    padding:5px;
+  }
+  .slide-frame-inner{
+    width:100%; height:100%; border-radius:50%; background:var(--panel-2);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace; font-size:34px; color:var(--muted);
+  }
+  .readme-text{ padding:26px 30px; }
+  .readme-text p{ color:var(--muted); line-height:1.8; font-size:15px; margin:0 0 14px; }
+  .readme-text strong{ color:var(--text); }
+  .tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+  .tag{
+    font-family:'IBM Plex Mono', monospace; font-size:12px;
+    padding:5px 10px; border-radius:6px; border:1px solid var(--line); color:var(--muted);
+  }
+
+  /* ---------- WORK STATION (tubes) ---------- */
+  .tubes{ display:flex; gap:26px; flex-wrap:wrap; justify-content:center; margin-bottom:36px; }
+  .tube{
+    width:88px; cursor:pointer; text-align:center; background:none; border:none;
+    font-family:'IBM Plex Mono', monospace; color:var(--muted);
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+  }
+  .tube-body{
+    width:34px; height:88px; border-radius:0 0 17px 17px; border:2px solid var(--line);
+    border-top:none; position:relative; overflow:hidden; background:var(--panel-2);
+    transition:border-color .2s;
+  }
+  .tube-liquid{ position:absolute; bottom:0; left:0; right:0; height:55%; opacity:.85; }
+  .tube-cap{ width:40px; height:10px; background:var(--line); border-radius:3px; margin-bottom:-2px; }
+  .tube.active .tube-body{ border-color:var(--tube-color, var(--a)); box-shadow:0 0 16px -2px var(--tube-color, var(--a)); }
+  .tube:hover .tube-body{ transform:translateY(-3px); }
+  .tube span{ font-size:11.5px; }
+
+  .panels{ position:relative; min-height:180px; }
+  .panel{
+    display:none; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:16px;
+  }
+  .panel.show{ display:grid; animation:fadein .35s ease; }
+  @keyframes fadein{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+  .card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:18px; border-left:3px solid var(--card-color, var(--a));
+  }
+  .card h4{ margin:0 0 8px; font-size:15px; font-family:'IBM Plex Mono', monospace; }
+  .card p{ margin:0; color:var(--muted); font-size:13.5px; line-height:1.6; }
+
+  /* ---------- GALLERY (gel lanes) ---------- */
+  .gel{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(120px,1fr)); gap:14px;
+  }
+  .well{
+    aspect-ratio:1; border:1px dashed var(--line); border-radius:var(--radius);
+    display:flex; align-items:center; justify-content:center;
+    background:var(--panel-2); cursor:pointer; transition:.2s;
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--muted);
+    flex-direction:column; gap:8px; text-align:center; padding:10px;
+  }
+  .well:hover{ border-color:var(--well-color, var(--a)); color:var(--text); transform:translateY(-2px); }
+  .well .band{ width:60%; height:4px; border-radius:2px; background:var(--well-color, var(--a)); opacity:.8; }
+
+  /* ---------- CORKBOARD ---------- */
+  .board-wrap{
+    background:
+      radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 1.5px) 0 0/16px 16px,
+      var(--panel-2);
+    border:1px solid var(--line); border-radius:var(--radius);
+    position:relative; min-height:340px; padding:20px; overflow:hidden;
+  }
+  .board-controls{ display:flex; gap:10px; margin-bottom:18px; flex-wrap:wrap; }
+  .note{
+    position:absolute; width:150px; min-height:110px; padding:14px;
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; line-height:1.5;
+    color:#1c1c1c; border-radius:3px; cursor:grab;
+    box-shadow:0 10px 20px -8px rgba(0,0,0,0.6);
+    outline:none; resize:none; border:none;
+  }
+  .note:active{ cursor:grabbing; }
+
+  .draw-wrap{ margin-top:22px; }
+  .draw-toolbar{ display:flex; gap:8px; margin-bottom:10px; align-items:center; flex-wrap:wrap; }
+  .swatch{ width:20px; height:20px; border-radius:50%; border:2px solid transparent; cursor:pointer; }
+  .swatch.selected{ border-color:#fff; }
+  canvas{ background:#0a1420; border:1px solid var(--line); border-radius:var(--radius); touch-action:none; width:100%; max-width:600px; display:block; }
+
+  /* ---------- CONTACT ---------- */
+  .terminal{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:24px 26px; font-family:'IBM Plex Mono', monospace; font-size:14px;
+  }
+  .terminal .row{ margin-bottom:14px; color:var(--muted); }
+  .terminal .row .prompt{ color:var(--a); margin-right:8px; }
+  .terminal .row .out{ color:var(--text); }
+  .terminal a.email{ color:var(--c); text-decoration:none; border-bottom:1px dashed var(--c); }
+  .terminal a.email:hover{ color:var(--text); }
+
+  footer{
+    text-align:center; padding:40px 20px; color:var(--muted);
+    font-family:'IBM Plex Mono', monospace; font-size:12px; border-top:1px solid var(--line);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">tacy<span>.</span>bio</div>
+  <ul>
+    <li><a href="#about"><span class="dot a"></span>sobre</a></li>
+    <li><a href="#work"><span class="dot g"></span>work</a></li>
+    <li><a href="#gallery"><span class="dot c"></span>scrapbook</a></li>
+    <li><a href="#board"><span class="dot t"></span>mural</a></li>
+    <li><a href="#contact"><span class="dot a"></span>contato</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="hero">
+  <div class="basepair-ticker">
+    <span id="tickerText"></span>
+  </div>
+  <div class="hero-eyebrow">// bem-vindo ao meu repositório pessoal</div>
+  <h1 id="heroTitle">&gt;&gt;&gt; import biomedicina as bio<span class="cursor">&nbsp;</span></h1>
+  <p>Estudante de Biomedicina que também vive no terminal. Front-end, Python e, agora, um pé (ainda incerto) na bioinformática. Esse site é meu bloco de notas de bancada — parte laboratório, parte código.</p>
+  <div class="cta">
+    <a class="btn solid" href="#work">ver meus projetos</a>
+    <a class="btn" href="#about">sobre mim</a>
+  </div>
+  <div class="scroll-cue"><div class="line"></div>scroll</div>
+</header>
+
+<section id="about">
+  <div class="eyebrow">01 — sobre</div>
+  <h2 class="title">README.md</h2>
+  <div class="readme">
+    <div class="titlebar">
+      <span class="tf r"></span><span class="tf y"></span><span class="tf gr"></span>
+      about.md — read-only
+    </div>
+    <div class="readme-body">
+      <div class="slide">
+        <div class="slide-frame"><div class="slide-frame-inner">🔬</div></div>
+      </div>
+      <div class="readme-text">
+        <p>Oi! Eu sou <strong>Taciane Evangelista</strong>. Curso <strong>Biomedicina</strong>, mas boa parte do meu tempo livre vira commits: entendo bem de <strong>front-end</strong> e já escrevo <strong>Python</strong> com confiança.</p>
+        <p>Ultimamente venho olhando pra <strong>bioinformática</strong> como próximo passo — misturar bancada e terminal parece fazer sentido pra mim, mesmo que eu ainda não tenha 100% de certeza que é esse o caminho. Esse site é meu jeito de organizar essa exploração.</p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Front-end</span>
+          <span class="tag">Biomedicina</span>
+          <span class="tag">Bioinformática (em progresso)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="eyebrow">02 — work station</div>
+  <h2 class="title">clique num tubo pra abrir a amostra</h2>
+  <div class="tubes">
+    <button class="tube active" data-panel="front" style="--tube-color:var(--c)">
+      <div class="tube-cap"></div>
+      <div class="tube-body"><div class="tube-liquid" style="background:var(--c)"></div></div>
+      <span>front-end</span>
+    </button>
+    <button class="tube" data-panel="python" style="--tube-color:var(--a)">
+      <div class="tube-cap"></div>
+      <div class="tube-body"><div class="tube-liquid" style="background:var(--a)"></div></div>
+      <span>python</span>
+    </button>
+    <button class="tube" data-panel="bio" style="--tube-color:var(--t)">
+      <div class="tube-cap"></div>
+      <div class="tube-body"><div class="tube-liquid" style="background:var(--t)"></div></div>
+      <span>biomed</span>
+    </button>
+    <button class="tube" data-panel="bioinfo" style="--tube-color:var(--g)">
+      <div class="tube-cap"></div>
+      <div class="tube-body"><div class="tube-liquid" style="background:var(--g)"></div></div>
+      <span>bioinfo</span>
+    </button>
+  </div>
+
+  <div class="panels">
+    <div class="panel show" id="panel-front" style="--card-color:var(--c)">
+      <div class="card"><h4>Analisador de Sequências de DNA</h4><p>Ferramenta em HTML/JS que analisa sequências de DNA direto no navegador: composição de bases, fita complementar, complementar reversa, transcrição pra mRNA e tradução pra proteína. <a href="https://github.com/TacyEvangelista/analisador-de-sequ-ncias/blob/main/dna.html" target="_blank" rel="noopener" style="color:var(--c)">ver código →</a></p></div>
+      <div class="card"><h4>projeto 02</h4><p>Espaço pra outro projeto ou protótipo de interface que você tenha construído.</p></div>
+    </div>
+    <div class="panel" id="panel-python" style="--card-color:var(--a)">
+      <div class="card"><h4>Simulação de Mutação Neural</h4><p>Simulação computacional de mutações em genes neurais e seus impactos na função neurofisiológica, em Python. <a href="https://github.com/TacyEvangelista/simular_mutacao_neural" target="_blank" rel="noopener" style="color:var(--a)">ver código →</a></p></div>
+      <div class="card"><h4>projeto 02</h4><p>Outro projeto em Python, com uma linha sobre o que ele resolve.</p></div>
+    </div>
+    <div class="panel" id="panel-bio" style="--card-color:var(--t)">
+      <div class="card"><h4>Pesquisa: Doença de Huntington</h4><p>Modelagem neurofisiológica da transmissão sináptica em neurônios estriatais sob influência da mutação no gene HTT associada à Doença de Huntington.</p></div>
+      <div class="card"><h4>Estágio em Hematologia — LABSAÚDE</h4><p>Estagiária voluntária no setor de Hematologia (14h/semana, 2026–atual): rotinas laboratoriais e assistenciais, interpretação de hemogramas, controle de qualidade, processamento de amostras biológicas e observação de procedimentos diagnósticos.</p></div>
+      <div class="card"><h4>Introdução à Análise de Dados para o SUS</h4><p>Curso de 50h pela Fundação Oswaldo Cruz (Fiocruz).</p></div>
+      <div class="card"><h4>Understanding Dementia</h4><p>Extensão universitária de 20h pela University of Tasmania (UTAS), Austrália.</p></div>
+    </div>
+    <div class="panel" id="panel-bioinfo" style="--card-color:var(--g)">
+      <div class="card"><h4>primeiros experimentos</h4><p>Ainda explorando — liste aqui cursos, tutoriais ou mini-projetos de bioinformática que for testando.</p></div>
+      <div class="card"><h4>próximo passo</h4><p>Uma ideia de projeto que você quer tentar pra validar se é esse o caminho.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="eyebrow">03 — scrapbook</div>
+  <h2 class="title">amostras &amp; rascunhos</h2>
+  <div class="gel" id="gelGallery">
+    <div class="well" style="padding:0; overflow:hidden;">
+      <img src="lab-tubos (1).jpeg" alt="Tubos de amostra organizados por cor no laboratório" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+    <div class="well" style="padding:0; overflow:hidden;">
+      <img src="lab-amostra.jpeg" alt="Tubo de amostra sendo separado na centrífuga" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+    <div class="well" style="padding:0; overflow:hidden;">
+      <img src="lab-microscopio.jpeg" alt="Hemácias vistas ao microscópio" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+  </div>
+</section>
+
+<section id="board">
+  <div class="eyebrow">04 — mural</div>
+  <h2 class="title">deixe um post-it (ou rabisque algo)</h2>
+  <div class="board-wrap">
+    <div class="board-controls">
+      <button class="btn" id="addNote">+ adicionar post-it</button>
+    </div>
+    <div id="noteLayer"></div>
+  </div>
+
+  <div class="draw-wrap">
+    <div class="draw-toolbar">
+      <span class="swatch selected" style="background:var(--a)" data-color="#5ee6a0"></span>
+      <span class="swatch" style="background:var(--t)" data-color="#ff7a7a"></span>
+      <span class="swatch" style="background:var(--g)" data-color="#f5c14f"></span>
+      <span class="swatch" style="background:var(--c)" data-color="#6fb3ff"></span>
+      <button class="btn" id="clearCanvas">limpar</button>
+    </div>
+    <canvas id="doodle" width="600" height="260"></canvas>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="eyebrow">05 — contato</div>
+  <h2 class="title">bora conversar?</h2>
+  <div class="terminal">
+    <div class="row"><span class="prompt">$</span><span class="out">contact --email</span></div>
+    <div class="row"><span class="prompt">></span><a class="email" href="mailto:ta7478421@gmail.com">ta7478421@gmail.com</a></div>
+    <div class="row"><span class="prompt">$</span><span class="out">contact --links</span></div>
+    <div class="row"><span class="prompt">></span><a class="email" href="https://github.com/TacyEvangelista" target="_blank" rel="noopener">github.com/TacyEvangelista</a></div>
+    <div class="row"><span class="prompt">></span><a class="email" href="https://www.linkedin.com/in/taciane-de-almeida-426a81288/" target="_blank" rel="noopener">linkedin.com/in/taciane-de-almeida</a></div>
+    <div class="row"><span class="prompt">$</span><span class="out">status</span></div>
+    <div class="row"><span class="prompt">></span><span class="out">aberta a trocar ideia sobre bioinformática, front-end e tudo no meio do caminho.</span></div>
+  </div>
+</section>
+
+<footer>feito com <span style="color:var(--a)">python</span>, <span style="color:var(--c)">css</span> e uma dose de curiosidade — edite este arquivo à vontade.</footer>
+
+<script>
+  // ticker de bases
+  const bases = ['A','T','G','C'];
+  const colorClass = {A:'baseA',T:'baseT',G:'baseG',C:'baseC'};
+  let seq = '';
+  for(let i=0;i<200;i++){ seq += bases[Math.floor(Math.random()*4)]; }
+  let html = '';
+  for(const b of (seq+seq)){ html += `<span class="${colorClass[b]}">${b}</span> `; }
+  document.getElementById('tickerText').innerHTML = html;
+
+  // hero typing effect
+  const phrases = [
+    '&gt;&gt;&gt; import biomedicina as bio',
+    '&gt;&gt;&gt; from front_end import interface',
+    '&gt;&gt;&gt; print("ainda explorando bioinformática")'
+  ];
+  const heroTitle = document.getElementById('heroTitle');
+  let pIndex = 0, charIndex = 0, deleting = false;
+  function typeLoop(){
+    const current = phrases[pIndex];
+    const plain = current.replace(/&gt;/g,'>');
+    if(!deleting){
+      charIndex++;
+      if(charIndex > plain.length){ deleting = true; setTimeout(typeLoop, 1400); return; }
+    } else {
+      charIndex--;
+      if(charIndex < 0){ deleting = false; pIndex = (pIndex+1) % phrases.length; charIndex = 0; }
+    }
+    heroTitle.innerHTML = plain.slice(0, charIndex).replace(/</g,'&lt;').replace(/>/g,'&gt;') + '<span class="cursor">&nbsp;</span>';
+    setTimeout(typeLoop, deleting ? 35 : 60);
+  }
+  typeLoop();
+
+  // tubes / panels
+  document.querySelectorAll('.tube').forEach(tube=>{
+    tube.addEventListener('click', ()=>{
+      document.querySelectorAll('.tube').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p=>p.classList.remove('show'));
+      tube.classList.add('active');
+      document.getElementById('panel-'+tube.dataset.panel).classList.add('show');
+    });
+  });
+
+  // sticky notes
+  const noteLayer = document.getElementById('noteLayer');
+  const noteColors = ['#5ee6a0','#ff7a7a','#f5c14f','#6fb3ff'];
+  let noteCount = 0;
+  function addNote(text, x, y, color){
+    const note = document.createElement('textarea');
+    note.className = 'note';
+    note.value = text || 'escreva algo...';
+    note.style.background = color || noteColors[noteCount % noteColors.length];
+    note.style.left = (x!=null?x:20 + (noteCount%3)*30) + 'px';
+    note.style.top = (y!=null?y:20 + (noteCount%3)*20) + 'px';
+    note.style.transform = `rotate(${(Math.random()*8-4).toFixed(1)}deg)`;
+    noteLayer.appendChild(note);
+    noteCount++;
+    makeDraggable(note);
+  }
+  function makeDraggable(el){
+    let offX, offY, dragging=false;
+    el.addEventListener('pointerdown', e=>{
+      if(e.target !== el) return;
+      dragging = true;
+      offX = e.clientX - el.offsetLeft;
+      offY = e.clientY - el.offsetTop;
+      el.setPointerCapture(e.pointerId);
+    });
+    el.addEventListener('pointermove', e=>{
+      if(!dragging) return;
+      const wrap = el.parentElement.getBoundingClientRect();
+      el.style.left = Math.max(0, e.clientX - offX) + 'px';
+      el.style.top = Math.max(0, e.clientY - offY) + 'px';
+    });
+    el.addEventListener('pointerup', ()=> dragging=false);
+  }
+  document.getElementById('addNote').addEventListener('click', ()=> addNote());
+  addNote('bora migrar pra bioinformática?', 30, 20, '#f5c14f');
+  addNote('lembrar de estudar Biopython', 210, 60, '#5ee6a0');
+
+  // doodle canvas
+  const canvas = document.getElementById('doodle');
+  const ctx = canvas.getContext('2d');
+  ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.strokeStyle = '#5ee6a0';
+  let drawing = false;
+  function getPos(e){
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return {x:(clientX-rect.left)*scaleX, y:(clientY-rect.top)*scaleY};
+  }
+  function start(e){ drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); }
+  function move(e){ if(!drawing) return; const p = getPos(e); ctx.lineTo(p.x,p.y); ctx.stroke(); e.preventDefault(); }
+  function end(){ drawing = false; }
+  canvas.addEventListener('mousedown', start);
+  canvas.addEventListener('mousemove', move);
+  window.addEventListener('mouseup', end);
+  canvas.addEventListener('touchstart', start);
+  canvas.addEventListener('touchmove', move, {passive:false});
+  canvas.addEventListener('touchend', end);
+  document.querySelectorAll('.swatch').forEach(s=>{
+    s.addEventListener('click', ()=>{
+      document.querySelectorAll('.swatch').forEach(x=>x.classList.remove('selected'));
+      s.classList.add('selected');
+      ctx.strokeStyle = s.dataset.color;
+    });
+  });
+  document.getElementById('clearCanvas').addEventListener('click', ()=>{
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+  });
+</script>
+</body>
+</html>
