@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Taci ✿ biomedicina, código e bioinformática</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%8C%B8%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -19,6 +20,8 @@ a{color:inherit}
 nav{position:sticky;top:10px;z-index:20;display:flex;gap:6px;flex-wrap:wrap;justify-content:center;width:fit-content;max-width:94%;margin:10px auto;background:#fffc;backdrop-filter:blur(8px);padding:6px;border-radius:99px;border:2px solid var(--tinta)}
 nav a{text-decoration:none;font:600 .95rem Fredoka;padding:6px 14px;border-radius:99px}
 nav a:hover{background:var(--lav)}
+nav .logo{background:var(--rosa);border:2px solid var(--tinta)}
+nav .logo:hover{background:var(--rosa2)}
 section{max-width:960px;margin:0 auto;padding:56px 20px}
 .btn{font:600 1rem Fredoka;border:2px solid var(--tinta);background:var(--rosa2);color:var(--tinta);padding:10px 20px;border-radius:99px;cursor:pointer;box-shadow:3px 3px 0 var(--tinta);transition:transform .1s,box-shadow .1s;text-decoration:none;display:inline-block}
 .btn:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 var(--tinta)}
@@ -77,7 +80,7 @@ footer{text-align:center;padding:30px 20px 50px;font-weight:700}
 </head>
 <body>
 <nav aria-label="Menu">
-<a href="#oi">oi ✿</a><a href="#sobre">sobre</a><a href="#lab">projetos</a><a href="#game">joguinho</a><a href="#recados">mural</a><a href="#contato">contato</a>
+<a href="#oi" class="logo" aria-label="Início">🌸 taci</a><a href="#oi">oi ✿</a><a href="#sobre">sobre</a><a href="#lab">projetos</a><a href="#game">joguinho</a><a href="#recados">mural</a><a href="#contato">contato</a>
 </nav>
 
 <section id="oi" class="hero">
