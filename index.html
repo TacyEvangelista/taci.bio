@@ -157,7 +157,7 @@ addEventListener('pointermove',e=>{document.querySelectorAll('.eye').forEach(el=
 /* sobre */
 const abas=[
 {n:'💻 ADS',c:'var(--ceu)',t:'Sou formada em Análise e Desenvolvimento de Sistemas. Entendo bastante de front-end e sei Python, C# e .NET. Gosto de transformar ideia em interface que dá vontade de clicar.',k:['Front-end','Python','C#','.NET','C']},
-{n:'🔬 Biomedicina',c:'var(--rosa)',t:'Estudo Biomedicina e faço estágio voluntário em Hematologia no LABSAÚDE: hemogramas, controle de qualidade e processamento de amostras. A bancada me ensinou a ter cuidado com cada detalhe.',k:['Hematologia','Laboratório','Hemograma','Neurociência']},
+{n:'🔬 Biomedicina',c:'var(--rosa)',t:'Estudo Biomedicina e faço estágiono em Hospital Municipal: hemogramas, controle de qualidade e processamento de amostras. A bancada me ensinou a ter cuidado com cada detalhe.',k:['Hematologia','Laboratório','Hemograma','Neurociência']},
 {n:'🧬 Bioinformática',c:'var(--menta)',t:'É o caminho que estou explorando: juntar bancada e terminal. Ainda não tenho 100% de certeza, e tudo bem. Cada projeto aqui é um experimento pra descobrir.',k:['Python','Simulações','Análise de dados','Em exploração ✿']}];
 const tabs=$('#tabs');
 abas.forEach((a,i)=>{const b=document.createElement('button');b.className='tab';b.textContent=a.n;b.role='tab';b.style.setProperty('--c',a.c);b.onclick=()=>mostra(i);tabs.appendChild(b)});
@@ -168,7 +168,7 @@ const proj=[
 {e:'🧬',c:'var(--menta)',tag:'bioinfo · front-end',t:'Analisador de Sequências de DNA',d:'Ferramenta em HTML/JS que analisa sequências de DNA direto no navegador: composição de bases, fita complementar, complementar reversa, transcrição pra mRNA e tradução pra proteína.',l:'https://github.com/TacyEvangelista/analisador-de-sequ-ncias/blob/main/dna.html'},
 {e:'🧠',c:'var(--lav)',tag:'bioinfo · python',t:'Simulação de Mutação Neural',d:'Simulação computacional de mutações em genes neurais e seus impactos na função neurofisiológica, em Python.',l:'https://github.com/TacyEvangelista/simular_mutacao_neural'},
 {e:'🔮',c:'var(--ceu)',tag:'pesquisa',t:'Pesquisa: Doença de Huntington',d:'Modelagem neurofisiológica da transmissão sináptica em neurônios estriatais sob influência da mutação no gene HTT associada à Doença de Huntington.'},
-{e:'🩸',c:'var(--rosa)',tag:'biomedicina',t:'Estágio em Hematologia · LABSAÚDE',d:'Estagiária voluntária (14h/semana, 2026–atual): rotinas laboratoriais e assistenciais, interpretação de hemogramas, controle de qualidade, processamento de amostras e observação de procedimentos diagnósticos.'},
+{e:'🩸',c:'var(--rosa)',tag:'biomedicina',t:'Estágio · HOSPITALAR',d:'Estagiária voluntária (14h/semana, 2026–atual): rotinas laboratoriais e assistenciais, interpretação de hemogramas, controle de qualidade, processamento de amostras e observação de procedimentos diagnósticos.'},
 {e:'📊',c:'var(--pessego)',tag:'curso',t:'Introdução à Análise de Dados para o SUS',d:'Curso de 50h pela Fundação Oswaldo Cruz (Fiocruz).'},
 {e:'🌏',c:'var(--menta)',tag:'extensão',t:'Understanding Dementia',d:'Extensão universitária de 20h pela University of Tasmania (UTAS), Austrália.'}];
 const tubos=$('#tubos');
