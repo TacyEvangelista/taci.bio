@@ -2,515 +2,205 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Taciane Evangelista — hub pessoal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taci ✿ biomedicina, código e bioinformática</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#0a0e13;
-    --bg-soft:#0f151c;
-    --panel:#131b23;
-    --panel-2:#0d1319;
-    --line:#232e38;
-    --text:#e7edf2;
-    --muted:#8697a3;
-    --a:#5ee6a0; /* Adenina - verde */
-    --t:#ff7a7a; /* Timina - vermelho */
-    --g:#f5c14f; /* Guanina - amarelo */
-    --c:#6fb3ff; /* Citosina - azul */
-    --radius:10px;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--text);
-    font-family:'IBM Plex Sans', sans-serif;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  h1,h2,h3, .mono{ font-family:'IBM Plex Mono', monospace; }
-  ::selection{ background:var(--a); color:#08120d; }
-
-  a{ color:inherit; }
-
-  /* ---------- NAV ---------- */
-  nav{
-    position:fixed; top:0; left:0; right:0; z-index:100;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:16px 28px;
-    background:rgba(10,14,19,0.75);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--line);
-    font-family:'IBM Plex Mono', monospace;
-    font-size:13px;
-  }
-  nav .brand{ color:var(--text); font-weight:600; letter-spacing:0.5px; }
-  nav .brand span{ color:var(--a); }
-  nav ul{ list-style:none; display:flex; gap:22px; margin:0; padding:0; }
-  nav ul li a{ text-decoration:none; color:var(--muted); display:flex; align-items:center; gap:7px; transition:color .2s;}
-  nav ul li a:hover{ color:var(--text); }
-  .dot{ width:7px; height:7px; border-radius:50%; display:inline-block; }
-  .dot.a{background:var(--a);} .dot.t{background:var(--t);} .dot.g{background:var(--g);} .dot.c{background:var(--c);}
-
-  /* ---------- HERO ---------- */
-  header.hero{
-    min-height:100svh;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    text-align:center;
-    position:relative;
-    padding:120px 20px 60px;
-  }
-  .basepair-ticker{
-    position:absolute; top:0; left:0; width:100%;
-    white-space:nowrap; overflow:hidden;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:15px; letter-spacing:6px;
-    opacity:0.35;
-    padding-top:70px;
-  }
-  .basepair-ticker span{ display:inline-block; animation:scroll-left 40s linear infinite; }
-  @keyframes scroll-left{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
-  .baseA{color:var(--a);} .baseT{color:var(--t);} .baseG{color:var(--g);} .baseC{color:var(--c);}
-
-  .hero-eyebrow{
-    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--a);
-    letter-spacing:2px; margin-bottom:18px;
-  }
-  .hero h1{
-    font-size:clamp(32px, 6vw, 64px);
-    line-height:1.15; margin:0 0 18px; font-weight:700;
-    max-width:900px;
-  }
-  .hero h1 .cursor{
-    display:inline-block; width:0.5em; background:var(--a);
-    animation:blink 1s steps(1) infinite; margin-left:4px;
-  }
-  @keyframes blink{ 50%{opacity:0;} }
-  .hero p{
-    max-width:560px; color:var(--muted); font-size:16px; line-height:1.7;
-    margin:0 0 34px;
-  }
-  .hero .cta{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
-  .btn{
-    font-family:'IBM Plex Mono', monospace; font-size:13px;
-    padding:12px 22px; border-radius:999px; border:1px solid var(--line);
-    background:var(--panel); color:var(--text); cursor:pointer;
-    text-decoration:none; transition:all .2s;
-  }
-  .btn:hover{ border-color:var(--a); color:var(--a); transform:translateY(-1px); }
-  .btn.solid{ background:var(--a); color:#08120d; border-color:var(--a); font-weight:600;}
-  .btn.solid:hover{ opacity:0.85; color:#08120d; }
-
-  .scroll-cue{
-    position:absolute; bottom:28px; font-family:'IBM Plex Mono', monospace;
-    font-size:11px; color:var(--muted); display:flex; flex-direction:column; align-items:center; gap:6px;
-  }
-  .scroll-cue .line{ width:1px; height:26px; background:linear-gradient(var(--a), transparent); animation:pulse 1.6s ease-in-out infinite; }
-  @keyframes pulse{ 0%,100%{opacity:.3;} 50%{opacity:1;} }
-
-  section{ padding:100px 24px; max-width:1080px; margin:0 auto; position:relative; }
-  .eyebrow{
-    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--muted);
-    letter-spacing:2px; text-transform:uppercase; margin-bottom:10px;
-    display:flex; align-items:center; gap:10px;
-  }
-  .eyebrow::before{ content:''; width:22px; height:1px; background:var(--line); }
-  h2.title{ font-size:clamp(24px,4vw,36px); margin:0 0 40px; }
-
-  /* ---------- ABOUT (README) ---------- */
-  .readme{
-    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
-    overflow:hidden;
-  }
-  .readme .titlebar{
-    display:flex; align-items:center; gap:8px; padding:12px 16px;
-    background:var(--panel-2); border-bottom:1px solid var(--line);
-    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--muted);
-  }
-  .titlebar .tf{ width:10px; height:10px; border-radius:50%; }
-  .titlebar .tf.r{background:var(--t);} .titlebar .tf.y{background:var(--g);} .titlebar .tf.gr{background:var(--a);}
-  .readme-body{ display:grid; grid-template-columns:200px 1fr; gap:0; }
-  @media (max-width:640px){ .readme-body{ grid-template-columns:1fr; } }
-  .slide{
-    padding:26px; display:flex; align-items:center; justify-content:center;
-    border-right:1px solid var(--line);
-  }
-  @media (max-width:640px){ .slide{ border-right:none; border-bottom:1px solid var(--line);} }
-  .slide-frame{
-    width:140px; height:140px; border-radius:50%;
-    background:conic-gradient(from 180deg, var(--a), var(--c), var(--g), var(--t), var(--a));
-    padding:5px;
-  }
-  .slide-frame-inner{
-    width:100%; height:100%; border-radius:50%; background:var(--panel-2);
-    display:flex; align-items:center; justify-content:center;
-    font-family:'IBM Plex Mono', monospace; font-size:34px; color:var(--muted);
-  }
-  .readme-text{ padding:26px 30px; }
-  .readme-text p{ color:var(--muted); line-height:1.8; font-size:15px; margin:0 0 14px; }
-  .readme-text strong{ color:var(--text); }
-  .tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
-  .tag{
-    font-family:'IBM Plex Mono', monospace; font-size:12px;
-    padding:5px 10px; border-radius:6px; border:1px solid var(--line); color:var(--muted);
-  }
-
-  /* ---------- WORK STATION (tubes) ---------- */
-  .tubes{ display:flex; gap:26px; flex-wrap:wrap; justify-content:center; margin-bottom:36px; }
-  .tube{
-    width:88px; cursor:pointer; text-align:center; background:none; border:none;
-    font-family:'IBM Plex Mono', monospace; color:var(--muted);
-    display:flex; flex-direction:column; align-items:center; gap:10px;
-  }
-  .tube-body{
-    width:34px; height:88px; border-radius:0 0 17px 17px; border:2px solid var(--line);
-    border-top:none; position:relative; overflow:hidden; background:var(--panel-2);
-    transition:border-color .2s;
-  }
-  .tube-liquid{ position:absolute; bottom:0; left:0; right:0; height:55%; opacity:.85; }
-  .tube-cap{ width:40px; height:10px; background:var(--line); border-radius:3px; margin-bottom:-2px; }
-  .tube.active .tube-body{ border-color:var(--tube-color, var(--a)); box-shadow:0 0 16px -2px var(--tube-color, var(--a)); }
-  .tube:hover .tube-body{ transform:translateY(-3px); }
-  .tube span{ font-size:11.5px; }
-
-  .panels{ position:relative; min-height:180px; }
-  .panel{
-    display:none; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:16px;
-  }
-  .panel.show{ display:grid; animation:fadein .35s ease; }
-  @keyframes fadein{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
-  .card{
-    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
-    padding:18px; border-left:3px solid var(--card-color, var(--a));
-  }
-  .card h4{ margin:0 0 8px; font-size:15px; font-family:'IBM Plex Mono', monospace; }
-  .card p{ margin:0; color:var(--muted); font-size:13.5px; line-height:1.6; }
-
-  /* ---------- GALLERY (gel lanes) ---------- */
-  .gel{
-    display:grid; grid-template-columns:repeat(auto-fill, minmax(120px,1fr)); gap:14px;
-  }
-  .well{
-    aspect-ratio:1; border:1px dashed var(--line); border-radius:var(--radius);
-    display:flex; align-items:center; justify-content:center;
-    background:var(--panel-2); cursor:pointer; transition:.2s;
-    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--muted);
-    flex-direction:column; gap:8px; text-align:center; padding:10px;
-  }
-  .well:hover{ border-color:var(--well-color, var(--a)); color:var(--text); transform:translateY(-2px); }
-  .well .band{ width:60%; height:4px; border-radius:2px; background:var(--well-color, var(--a)); opacity:.8; }
-
-  /* ---------- CORKBOARD ---------- */
-  .board-wrap{
-    background:
-      radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 1.5px) 0 0/16px 16px,
-      var(--panel-2);
-    border:1px solid var(--line); border-radius:var(--radius);
-    position:relative; min-height:340px; padding:20px; overflow:hidden;
-  }
-  .board-controls{ display:flex; gap:10px; margin-bottom:18px; flex-wrap:wrap; }
-  .note{
-    position:absolute; width:150px; min-height:110px; padding:14px;
-    font-family:'IBM Plex Mono', monospace; font-size:12.5px; line-height:1.5;
-    color:#1c1c1c; border-radius:3px; cursor:grab;
-    box-shadow:0 10px 20px -8px rgba(0,0,0,0.6);
-    outline:none; resize:none; border:none;
-  }
-  .note:active{ cursor:grabbing; }
-
-  .draw-wrap{ margin-top:22px; }
-  .draw-toolbar{ display:flex; gap:8px; margin-bottom:10px; align-items:center; flex-wrap:wrap; }
-  .swatch{ width:20px; height:20px; border-radius:50%; border:2px solid transparent; cursor:pointer; }
-  .swatch.selected{ border-color:#fff; }
-  canvas{ background:#0a1420; border:1px solid var(--line); border-radius:var(--radius); touch-action:none; width:100%; max-width:600px; display:block; }
-
-  /* ---------- CONTACT ---------- */
-  .terminal{
-    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
-    padding:24px 26px; font-family:'IBM Plex Mono', monospace; font-size:14px;
-  }
-  .terminal .row{ margin-bottom:14px; color:var(--muted); }
-  .terminal .row .prompt{ color:var(--a); margin-right:8px; }
-  .terminal .row .out{ color:var(--text); }
-  .terminal a.email{ color:var(--c); text-decoration:none; border-bottom:1px dashed var(--c); }
-  .terminal a.email:hover{ color:var(--text); }
-
-  footer{
-    text-align:center; padding:40px 20px; color:var(--muted);
-    font-family:'IBM Plex Mono', monospace; font-size:12px; border-top:1px solid var(--line);
-  }
+:root{--rosa:#ffc9e0;--rosa2:#ff8fbd;--lav:#dccbff;--menta:#c6f1de;--pessego:#ffd9bd;--ceu:#c9e6ff;--bg:#fff0f7;--tinta:#4a2c4f;--card:#fff;}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--tinta);font:400 17px/1.6 Nunito,sans-serif;
+background-image:radial-gradient(var(--rosa) 1.5px,transparent 1.5px);background-size:26px 26px;overflow-x:hidden}
+h1,h2,h3{font-family:Fredoka,sans-serif;font-weight:600;line-height:1.15;margin:0 0 .5em}
+h1{font-size:clamp(2.4rem,7vw,4.4rem)}h2{font-size:clamp(1.8rem,4vw,2.6rem)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--tinta);outline-offset:3px;border-radius:8px}
+nav{position:sticky;top:10px;z-index:20;display:flex;gap:6px;flex-wrap:wrap;justify-content:center;width:fit-content;max-width:94%;margin:10px auto;background:#fffc;backdrop-filter:blur(8px);padding:6px;border-radius:99px;border:2px solid var(--tinta)}
+nav a{text-decoration:none;font:600 .95rem Fredoka;padding:6px 14px;border-radius:99px}
+nav a:hover{background:var(--lav)}
+section{max-width:960px;margin:0 auto;padding:56px 20px}
+.btn{font:600 1rem Fredoka;border:2px solid var(--tinta);background:var(--rosa2);color:var(--tinta);padding:10px 20px;border-radius:99px;cursor:pointer;box-shadow:3px 3px 0 var(--tinta);transition:transform .1s,box-shadow .1s;text-decoration:none;display:inline-block}
+.btn:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 var(--tinta)}
+.btn:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--tinta)}
+.box{background:var(--card);border:2px solid var(--tinta);border-radius:24px;box-shadow:5px 5px 0 var(--tinta);padding:22px}
+/* hero */
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:30px;align-items:center;min-height:70vh}
+.hero p{max-width:46ch}
+.stage{position:relative;height:300px;display:grid;place-items:center}
+.blob{width:190px;height:170px;background:var(--menta);border:3px solid var(--tinta);border-radius:58% 42% 52% 48%/55% 50% 50% 45%;position:relative;cursor:pointer;animation:bob 3s ease-in-out infinite;box-shadow:inset -12px -10px 0 #0001}
+.blob:active{transform:scale(.92)}
+.blob .nuc{position:absolute;width:52px;height:52px;border-radius:50%;background:var(--lav);border:3px solid var(--tinta);right:30px;top:24px}
+.eye{position:absolute;top:70px;width:26px;height:30px;background:#fff;border:3px solid var(--tinta);border-radius:50%;overflow:hidden}
+.eye i{position:absolute;width:12px;height:14px;background:var(--tinta);border-radius:50%;left:5px;top:7px}
+.e1{left:38px}.e2{left:86px}
+.mouth{position:absolute;left:72px;top:112px;width:26px;height:12px;border-bottom:3px solid var(--tinta);border-radius:0 0 30px 30px}
+.cheek{position:absolute;top:104px;width:20px;height:12px;border-radius:50%;background:var(--rosa2);opacity:.6}
+.c1{left:22px}.c2{left:128px}
+.fala{position:absolute;top:0;left:50%;transform:translateX(-50%);background:#fff;border:2px solid var(--tinta);border-radius:18px;padding:6px 14px;font:600 .95rem Fredoka;white-space:nowrap}
+@keyframes bob{50%{transform:translateY(-10px)}}
+.spark{position:fixed;pointer-events:none;z-index:99;font-size:18px;animation:pop .8s ease-out forwards}
+@keyframes pop{to{transform:translate(var(--x),var(--y)) scale(.3) rotate(120deg);opacity:0}}
+/* sobre */
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.tab{font:600 1rem Fredoka;border:2px solid var(--tinta);background:#fff;padding:8px 18px;border-radius:99px;cursor:pointer;color:var(--tinta)}
+.tab[aria-selected=true]{background:var(--c);box-shadow:3px 3px 0 var(--tinta)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{background:var(--c);border:2px solid var(--tinta);border-radius:99px;padding:2px 12px;font-weight:700;font-size:.9rem}
+/* tubos */
+.tubos{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:22px}
+.tubo{width:74px;height:150px;border:3px solid var(--tinta);border-radius:12px 12px 38px 38px;background:#fff;position:relative;overflow:hidden;cursor:pointer;padding:0;transition:transform .15s}
+.tubo:hover{transform:rotate(-6deg) translateY(-6px)}
+.tubo::before{content:"";position:absolute;inset:auto 0 0 0;height:var(--n,60%);background:var(--c);border-top:3px solid var(--tinta);transition:height .4s}
+.tubo[aria-pressed=true]::before{height:88%}
+.tubo span{position:absolute;top:8px;left:0;right:0;font-size:1.5rem;z-index:1}
+#det{min-height:150px}
+#det .tag{display:inline-block;background:var(--c);border:2px solid var(--tinta);border-radius:99px;padding:0 12px;font-weight:700;font-size:.85rem;margin-bottom:8px}
+/* game */
+.game{text-align:center;background:var(--ceu)}
+.alvo{transition:background .2s;font:600 5rem Fredoka;width:130px;height:130px;margin:10px auto;display:grid;place-items:center;background:#fff;border:3px solid var(--tinta);border-radius:50%}
+.alvo.err{animation:tr .3s}
+@keyframes tr{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.opts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.opts .btn{width:62px;padding:10px 0;font-size:1.4rem;background:var(--pessego)}
+.hud{display:flex;justify-content:center;gap:24px;font:600 1.1rem Fredoka}
+/* mural */
+#mural{position:relative;height:340px;background:#fff8ec;border:3px dashed var(--tinta);border-radius:24px;overflow:hidden;touch-action:none}
+.pit{position:absolute;width:140px;min-height:110px;padding:10px;border:2px solid var(--tinta);box-shadow:3px 3px 0 var(--tinta);cursor:grab;font-weight:700;font-size:.92rem;line-height:1.3;word-break:break-word;user-select:none;border-radius:6px 6px 22px 6px}
+.pit:active{cursor:grabbing}
+.add{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.add input{flex:1;min-width:180px;font:inherit;padding:10px 16px;border:2px solid var(--tinta);border-radius:99px;background:#fff;color:var(--tinta)}
+footer{text-align:center;padding:30px 20px 50px;font-weight:700}
+@media(max-width:700px){.hero{grid-template-columns:1fr;min-height:auto}.stage{height:260px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-
-<nav>
-  <div class="brand">tacy<span>.</span>bio</div>
-  <ul>
-    <li><a href="#about"><span class="dot a"></span>sobre</a></li>
-    <li><a href="#work"><span class="dot g"></span>work</a></li>
-    <li><a href="#gallery"><span class="dot c"></span>scrapbook</a></li>
-    <li><a href="#board"><span class="dot t"></span>mural</a></li>
-    <li><a href="#contact"><span class="dot a"></span>contato</a></li>
-  </ul>
+<nav aria-label="Menu">
+<a href="#oi">oi ✿</a><a href="#sobre">sobre</a><a href="#lab">projetos</a><a href="#game">joguinho</a><a href="#recados">mural</a><a href="#contato">contato</a>
 </nav>
 
-<header class="hero" id="hero">
-  <div class="basepair-ticker">
-    <span id="tickerText"></span>
-  </div>
-  <div class="hero-eyebrow">// bem-vindo ao meu repositório pessoal</div>
-  <h1 id="heroTitle">&gt;&gt;&gt; import biomedicina as bio<span class="cursor">&nbsp;</span></h1>
-  <p>Estudante de Biomedicina que também vive no terminal. Front-end, Python e, agora, um pé (ainda incerto) na bioinformática. Esse site é meu bloco de notas de bancada — parte laboratório, parte código.</p>
-  <div class="cta">
-    <a class="btn solid" href="#work">ver meus projetos</a>
-    <a class="btn" href="#about">sobre mim</a>
-  </div>
-  <div class="scroll-cue"><div class="line"></div>scroll</div>
-</header>
-
-<section id="about">
-  <div class="eyebrow">01 — sobre</div>
-  <h2 class="title">README.md</h2>
-  <div class="readme">
-    <div class="titlebar">
-      <span class="tf r"></span><span class="tf y"></span><span class="tf gr"></span>
-      about.md — read-only
-    </div>
-    <div class="readme-body">
-      <div class="slide">
-        <div class="slide-frame"><div class="slide-frame-inner">🔬</div></div>
-      </div>
-      <div class="readme-text">
-        <p>Oi! Eu sou <strong>Taciane Evangelista</strong>. Curso <strong>Biomedicina</strong>, mas boa parte do meu tempo livre vira commits: entendo bem de <strong>front-end</strong> e já escrevo <strong>Python</strong> com confiança.</p>
-        <p>Ultimamente venho olhando pra <strong>bioinformática</strong> como próximo passo — misturar bancada e terminal parece fazer sentido pra mim, mesmo que eu ainda não tenha 100% de certeza que é esse o caminho. Esse site é meu jeito de organizar essa exploração.</p>
-        <div class="tags">
-          <span class="tag">Python</span>
-          <span class="tag">Front-end</span>
-          <span class="tag">Biomedicina</span>
-          <span class="tag">Bioinformática (em progresso)</span>
-        </div>
-      </div>
-    </div>
-  </div>
+<section id="oi" class="hero">
+<div>
+<h1>oi, eu sou a Taci! ✿</h1>
+<p>Estudo <b>Biomedicina</b>, sou formada em <b>ADS</b> e vivo entre a bancada e o código. Estou explorando a <b>bioinformática</b> pra descobrir se é o meu caminho. Este site é meu cantinho pra brincar, mostrar o que eu faço e juntar tudo num lugar só.</p>
+<p><a class="btn" href="#lab">ver meus projetos</a> <a class="btn" style="background:var(--lav)" href="#game">jogar ♡</a></p>
+</div>
+<div class="stage">
+<div class="fala" id="fala">cutuca eu!</div>
+<div class="blob" id="blob" role="button" tabindex="0" aria-label="Cutucar a célula mascote">
+<div class="nuc"></div><div class="eye e1"><i></i></div><div class="eye e2"><i></i></div>
+<div class="cheek c1"></div><div class="cheek c2"></div><div class="mouth"></div>
+</div>
+</div>
 </section>
 
-<section id="work">
-  <div class="eyebrow">02 — work station</div>
-  <h2 class="title">clique num tubo pra abrir a amostra</h2>
-  <div class="tubes">
-    <button class="tube active" data-panel="front" style="--tube-color:var(--c)">
-      <div class="tube-cap"></div>
-      <div class="tube-body"><div class="tube-liquid" style="background:var(--c)"></div></div>
-      <span>front-end</span>
-    </button>
-    <button class="tube" data-panel="python" style="--tube-color:var(--a)">
-      <div class="tube-cap"></div>
-      <div class="tube-body"><div class="tube-liquid" style="background:var(--a)"></div></div>
-      <span>python</span>
-    </button>
-    <button class="tube" data-panel="bio" style="--tube-color:var(--t)">
-      <div class="tube-cap"></div>
-      <div class="tube-body"><div class="tube-liquid" style="background:var(--t)"></div></div>
-      <span>biomed</span>
-    </button>
-    <button class="tube" data-panel="bioinfo" style="--tube-color:var(--g)">
-      <div class="tube-cap"></div>
-      <div class="tube-body"><div class="tube-liquid" style="background:var(--g)"></div></div>
-      <span>bioinfo</span>
-    </button>
-  </div>
-
-  <div class="panels">
-    <div class="panel show" id="panel-front" style="--card-color:var(--c)">
-      <div class="card"><h4>Analisador de Sequências de DNA</h4><p>Ferramenta em HTML/JS que analisa sequências de DNA direto no navegador: composição de bases, fita complementar, complementar reversa, transcrição pra mRNA e tradução pra proteína. <a href="https://github.com/TacyEvangelista/analisador-de-sequ-ncias/blob/main/dna.html" target="_blank" rel="noopener" style="color:var(--c)">ver código →</a></p></div>
-      <div class="card"><h4>projeto 02</h4><p>Espaço pra outro projeto ou protótipo de interface que você tenha construído.</p></div>
-    </div>
-    <div class="panel" id="panel-python" style="--card-color:var(--a)">
-      <div class="card"><h4>Simulação de Mutação Neural</h4><p>Simulação computacional de mutações em genes neurais e seus impactos na função neurofisiológica, em Python. <a href="https://github.com/TacyEvangelista/simular_mutacao_neural" target="_blank" rel="noopener" style="color:var(--a)">ver código →</a></p></div>
-      <div class="card"><h4>projeto 02</h4><p>Outro projeto em Python, com uma linha sobre o que ele resolve.</p></div>
-    </div>
-    <div class="panel" id="panel-bio" style="--card-color:var(--t)">
-      <div class="card"><h4>Pesquisa: Doença de Huntington</h4><p>Modelagem neurofisiológica da transmissão sináptica em neurônios estriatais sob influência da mutação no gene HTT associada à Doença de Huntington.</p></div>
-      <div class="card"><h4>Estágio em Hematologia — LABSAÚDE</h4><p>Estagiária voluntária no setor de Hematologia (14h/semana, 2026–atual): rotinas laboratoriais e assistenciais, interpretação de hemogramas, controle de qualidade, processamento de amostras biológicas e observação de procedimentos diagnósticos.</p></div>
-      <div class="card"><h4>Introdução à Análise de Dados para o SUS</h4><p>Curso de 50h pela Fundação Oswaldo Cruz (Fiocruz).</p></div>
-      <div class="card"><h4>Understanding Dementia</h4><p>Extensão universitária de 20h pela University of Tasmania (UTAS), Austrália.</p></div>
-    </div>
-    <div class="panel" id="panel-bioinfo" style="--card-color:var(--g)">
-      <div class="card"><h4>primeiros experimentos</h4><p>Ainda explorando — liste aqui cursos, tutoriais ou mini-projetos de bioinformática que for testando.</p></div>
-      <div class="card"><h4>próximo passo</h4><p>Uma ideia de projeto que você quer tentar pra validar se é esse o caminho.</p></div>
-    </div>
-  </div>
+<section id="sobre">
+<h2>um pouquinho de mim</h2>
+<div class="tabs" role="tablist" id="tabs"></div>
+<div class="box" id="painel" role="tabpanel"></div>
 </section>
 
-<section id="gallery">
-  <div class="eyebrow">03 — scrapbook</div>
-  <h2 class="title">amostras &amp; rascunhos</h2>
-  <div class="gel" id="gelGallery">
-    <div class="well" style="padding:0; overflow:hidden;">
-      <img src="lab-tubos (1).jpeg" alt="Tubos de amostra organizados por cor no laboratório" style="width:100%; height:100%; object-fit:cover;">
-    </div>
-    <div class="well" style="padding:0; overflow:hidden;">
-      <img src="lab-amostra.jpeg" alt="Tubo de amostra sendo separado na centrífuga" style="width:100%; height:100%; object-fit:cover;">
-    </div>
-    <div class="well" style="padding:0; overflow:hidden;">
-      <img src="lab-microscopio.jpeg" alt="Hemácias vistas ao microscópio" style="width:100%; height:100%; object-fit:cover;">
-    </div>
-  </div>
+<section id="lab">
+<h2>meu laboratório de projetos</h2>
+<p>Clica num tubinho pra abrir a amostra 🧪</p>
+<div class="tubos" id="tubos"></div>
+<div class="box" id="det" aria-live="polite"></div>
 </section>
 
-<section id="board">
-  <div class="eyebrow">04 — mural</div>
-  <h2 class="title">deixe um post-it (ou rabisque algo)</h2>
-  <div class="board-wrap">
-    <div class="board-controls">
-      <button class="btn" id="addNote">+ adicionar post-it</button>
-    </div>
-    <div id="noteLayer"></div>
-  </div>
-
-  <div class="draw-wrap">
-    <div class="draw-toolbar">
-      <span class="swatch selected" style="background:var(--a)" data-color="#5ee6a0"></span>
-      <span class="swatch" style="background:var(--t)" data-color="#ff7a7a"></span>
-      <span class="swatch" style="background:var(--g)" data-color="#f5c14f"></span>
-      <span class="swatch" style="background:var(--c)" data-color="#6fb3ff"></span>
-      <button class="btn" id="clearCanvas">limpar</button>
-    </div>
-    <canvas id="doodle" width="600" height="260"></canvas>
-  </div>
+<section id="game">
+<h2>joguinho: pareia o DNA</h2>
+<div class="box game">
+<p><b>Como brincar:</b> aparece uma letrinha grande. Clica na letra que combina com ela. Sem tempo, sem pressa!</p>
+<div class="chips" style="justify-content:center;margin:0 0 14px">
+<span class="chip" style="--c:var(--rosa)">A 💗 T</span><span class="chip" style="--c:var(--menta)">C 💗 G</span></div>
+<div class="hud"><span>rodada <b id="rod">0</b>/10</span><span>⭐ <b id="pts">0</b></span><span>🏆 <b id="rec">0</b></span></div>
+<div class="alvo" id="alvo">?</div>
+<p id="dica" aria-live="polite" style="min-height:1.6em;font-weight:700">aperta “começar” pra jogar ✿</p>
+<div class="opts" id="opts"></div>
+<p><button class="btn" id="start">começar</button></p>
+</div>
 </section>
 
-<section id="contact">
-  <div class="eyebrow">05 — contato</div>
-  <h2 class="title">bora conversar?</h2>
-  <div class="terminal">
-    <div class="row"><span class="prompt">$</span><span class="out">contact --email</span></div>
-    <div class="row"><span class="prompt">></span><a class="email" href="mailto:ta7478421@gmail.com">ta7478421@gmail.com</a></div>
-    <div class="row"><span class="prompt">$</span><span class="out">contact --links</span></div>
-    <div class="row"><span class="prompt">></span><a class="email" href="https://github.com/TacyEvangelista" target="_blank" rel="noopener">github.com/TacyEvangelista</a></div>
-    <div class="row"><span class="prompt">></span><a class="email" href="https://www.linkedin.com/in/taciane-de-almeida-426a81288/" target="_blank" rel="noopener">linkedin.com/in/taciane-de-almeida</a></div>
-    <div class="row"><span class="prompt">$</span><span class="out">status</span></div>
-    <div class="row"><span class="prompt">></span><span class="out">aberta a trocar ideia sobre bioinformática, front-end e tudo no meio do caminho.</span></div>
-  </div>
+<section id="recados">
+<h2>mural de post-its</h2>
+<p>Deixa um recadinho e arrasta os post-its pra onde quiser.</p>
+<div id="mural"></div>
+<div class="add"><input id="txt" maxlength="80" placeholder="escreve aqui um recadinho…" aria-label="Texto do post-it"><button class="btn" id="addp">colar</button><button class="btn" id="limpa" style="background:#fff">limpar</button></div>
 </section>
 
-<footer>feito com <span style="color:var(--a)">python</span>, <span style="color:var(--c)">css</span> e uma dose de curiosidade — edite este arquivo à vontade.</footer>
+<section id="contato">
+<h2>bora conversar? ♡</h2>
+<div class="box">
+<p>Aberta pra trocar ideia sobre bioinformática, front-end e tudo no meio do caminho.</p>
+<p><a class="btn" href="mailto:ta7478421@gmail.com">e-mail</a>
+<a class="btn" style="background:var(--menta)" href="https://github.com/TacyEvangelista">GitHub</a>
+<a class="btn" style="background:var(--ceu)" href="https://www.linkedin.com/in/taciane-de-almeida-426a81288/">LinkedIn</a></p>
+</div>
+</section>
+<footer>feito com carinho, café e curiosidade ✿</footer>
 
 <script>
-  // ticker de bases
-  const bases = ['A','T','G','C'];
-  const colorClass = {A:'baseA',T:'baseT',G:'baseG',C:'baseC'};
-  let seq = '';
-  for(let i=0;i<200;i++){ seq += bases[Math.floor(Math.random()*4)]; }
-  let html = '';
-  for(const b of (seq+seq)){ html += `<span class="${colorClass[b]}">${b}</span> `; }
-  document.getElementById('tickerText').innerHTML = html;
-
-  // hero typing effect
-  const phrases = [
-    '&gt;&gt;&gt; import biomedicina as bio',
-    '&gt;&gt;&gt; from front_end import interface',
-    '&gt;&gt;&gt; print("ainda explorando bioinformática")'
-  ];
-  const heroTitle = document.getElementById('heroTitle');
-  let pIndex = 0, charIndex = 0, deleting = false;
-  function typeLoop(){
-    const current = phrases[pIndex];
-    const plain = current.replace(/&gt;/g,'>');
-    if(!deleting){
-      charIndex++;
-      if(charIndex > plain.length){ deleting = true; setTimeout(typeLoop, 1400); return; }
-    } else {
-      charIndex--;
-      if(charIndex < 0){ deleting = false; pIndex = (pIndex+1) % phrases.length; charIndex = 0; }
-    }
-    heroTitle.innerHTML = plain.slice(0, charIndex).replace(/</g,'&lt;').replace(/>/g,'&gt;') + '<span class="cursor">&nbsp;</span>';
-    setTimeout(typeLoop, deleting ? 35 : 60);
-  }
-  typeLoop();
-
-  // tubes / panels
-  document.querySelectorAll('.tube').forEach(tube=>{
-    tube.addEventListener('click', ()=>{
-      document.querySelectorAll('.tube').forEach(t=>t.classList.remove('active'));
-      document.querySelectorAll('.panel').forEach(p=>p.classList.remove('show'));
-      tube.classList.add('active');
-      document.getElementById('panel-'+tube.dataset.panel).classList.add('show');
-    });
-  });
-
-  // sticky notes
-  const noteLayer = document.getElementById('noteLayer');
-  const noteColors = ['#5ee6a0','#ff7a7a','#f5c14f','#6fb3ff'];
-  let noteCount = 0;
-  function addNote(text, x, y, color){
-    const note = document.createElement('textarea');
-    note.className = 'note';
-    note.value = text || 'escreva algo...';
-    note.style.background = color || noteColors[noteCount % noteColors.length];
-    note.style.left = (x!=null?x:20 + (noteCount%3)*30) + 'px';
-    note.style.top = (y!=null?y:20 + (noteCount%3)*20) + 'px';
-    note.style.transform = `rotate(${(Math.random()*8-4).toFixed(1)}deg)`;
-    noteLayer.appendChild(note);
-    noteCount++;
-    makeDraggable(note);
-  }
-  function makeDraggable(el){
-    let offX, offY, dragging=false;
-    el.addEventListener('pointerdown', e=>{
-      if(e.target !== el) return;
-      dragging = true;
-      offX = e.clientX - el.offsetLeft;
-      offY = e.clientY - el.offsetTop;
-      el.setPointerCapture(e.pointerId);
-    });
-    el.addEventListener('pointermove', e=>{
-      if(!dragging) return;
-      const wrap = el.parentElement.getBoundingClientRect();
-      el.style.left = Math.max(0, e.clientX - offX) + 'px';
-      el.style.top = Math.max(0, e.clientY - offY) + 'px';
-    });
-    el.addEventListener('pointerup', ()=> dragging=false);
-  }
-  document.getElementById('addNote').addEventListener('click', ()=> addNote());
-  addNote('bora migrar pra bioinformática?', 30, 20, '#f5c14f');
-  addNote('lembrar de estudar Biopython', 210, 60, '#5ee6a0');
-
-  // doodle canvas
-  const canvas = document.getElementById('doodle');
-  const ctx = canvas.getContext('2d');
-  ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.strokeStyle = '#5ee6a0';
-  let drawing = false;
-  function getPos(e){
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    return {x:(clientX-rect.left)*scaleX, y:(clientY-rect.top)*scaleY};
-  }
-  function start(e){ drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); }
-  function move(e){ if(!drawing) return; const p = getPos(e); ctx.lineTo(p.x,p.y); ctx.stroke(); e.preventDefault(); }
-  function end(){ drawing = false; }
-  canvas.addEventListener('mousedown', start);
-  canvas.addEventListener('mousemove', move);
-  window.addEventListener('mouseup', end);
-  canvas.addEventListener('touchstart', start);
-  canvas.addEventListener('touchmove', move, {passive:false});
-  canvas.addEventListener('touchend', end);
-  document.querySelectorAll('.swatch').forEach(s=>{
-    s.addEventListener('click', ()=>{
-      document.querySelectorAll('.swatch').forEach(x=>x.classList.remove('selected'));
-      s.classList.add('selected');
-      ctx.strokeStyle = s.dataset.color;
-    });
-  });
-  document.getElementById('clearCanvas').addEventListener('click', ()=>{
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-  });
+const $=s=>document.querySelector(s);
+const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+/* faíscas */
+addEventListener('pointerdown',e=>{if(rm)return;for(let i=0;i<6;i++){const s=document.createElement('span');s.className='spark';s.textContent=['✦','♡','✿','★'][i%4];s.style.cssText=`left:${e.clientX}px;top:${e.clientY}px;--x:${(Math.random()-.5)*110}px;--y:${(Math.random()-.5)*110}px`;document.body.appendChild(s);s.onanimationend=()=>s.remove()}});
+/* mascote */
+const falas=['oi oi! ✿','eu sou uma célula feliz','bora sequenciar?','tem joguinho lá embaixo!','já bebeu água? 💧','mitocôndria é a usina ⚡','Python + jaleco = ♡'];
+let fi=0;const blob=$('#blob');
+const poke=()=>{$('#fala').textContent=falas[fi++%falas.length]};
+blob.onclick=poke;blob.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();poke()}};
+addEventListener('pointermove',e=>{document.querySelectorAll('.eye').forEach(el=>{const r=el.getBoundingClientRect(),a=Math.atan2(e.clientY-r.y-15,e.clientX-r.x-13);el.firstChild.style.transform=`translate(${Math.cos(a)*5}px,${Math.sin(a)*5}px)`})});
+/* sobre */
+const abas=[
+{n:'💻 ADS',c:'var(--ceu)',t:'Sou formada em Análise e Desenvolvimento de Sistemas. Entendo bastante de front-end e sei Python, C# e .NET. Gosto de transformar ideia em interface que dá vontade de clicar.',k:['Front-end','Python','C#','.NET','C']},
+{n:'🔬 Biomedicina',c:'var(--rosa)',t:'Estudo Biomedicina e faço estágio voluntário em Hematologia no LABSAÚDE: hemogramas, controle de qualidade e processamento de amostras. A bancada me ensinou a ter cuidado com cada detalhe.',k:['Hematologia','Laboratório','Hemograma','Neurociência']},
+{n:'🧬 Bioinformática',c:'var(--menta)',t:'É o caminho que estou explorando: juntar bancada e terminal. Ainda não tenho 100% de certeza, e tudo bem. Cada projeto aqui é um experimento pra descobrir.',k:['Python','Simulações','Análise de dados','Em exploração ✿']}];
+const tabs=$('#tabs');
+abas.forEach((a,i)=>{const b=document.createElement('button');b.className='tab';b.textContent=a.n;b.role='tab';b.style.setProperty('--c',a.c);b.onclick=()=>mostra(i);tabs.appendChild(b)});
+function mostra(i){const a=abas[i];[...tabs.children].forEach((b,j)=>b.setAttribute('aria-selected',i===j));$('#painel').innerHTML=`<p>${a.t}</p><div class="chips">${a.k.map(k=>`<span class="chip" style="--c:${a.c}">${k}</span>`).join('')}</div>`}
+mostra(0);
+/* projetos */
+const proj=[
+{e:'🧬',c:'var(--menta)',tag:'bioinfo · front-end',t:'Analisador de Sequências de DNA',d:'Ferramenta em HTML/JS que analisa sequências de DNA direto no navegador: composição de bases, fita complementar, complementar reversa, transcrição pra mRNA e tradução pra proteína.',l:'https://github.com/TacyEvangelista/analisador-de-sequ-ncias/blob/main/dna.html'},
+{e:'🧠',c:'var(--lav)',tag:'bioinfo · python',t:'Simulação de Mutação Neural',d:'Simulação computacional de mutações em genes neurais e seus impactos na função neurofisiológica, em Python.',l:'https://github.com/TacyEvangelista/simular_mutacao_neural'},
+{e:'🔮',c:'var(--ceu)',tag:'pesquisa',t:'Pesquisa: Doença de Huntington',d:'Modelagem neurofisiológica da transmissão sináptica em neurônios estriatais sob influência da mutação no gene HTT associada à Doença de Huntington.'},
+{e:'🩸',c:'var(--rosa)',tag:'biomedicina',t:'Estágio em Hematologia · LABSAÚDE',d:'Estagiária voluntária (14h/semana, 2026–atual): rotinas laboratoriais e assistenciais, interpretação de hemogramas, controle de qualidade, processamento de amostras e observação de procedimentos diagnósticos.'},
+{e:'📊',c:'var(--pessego)',tag:'curso',t:'Introdução à Análise de Dados para o SUS',d:'Curso de 50h pela Fundação Oswaldo Cruz (Fiocruz).'},
+{e:'🌏',c:'var(--menta)',tag:'extensão',t:'Understanding Dementia',d:'Extensão universitária de 20h pela University of Tasmania (UTAS), Austrália.'}];
+const tubos=$('#tubos');
+proj.forEach((p,i)=>{const b=document.createElement('button');b.className='tubo';b.style.cssText=`--c:${p.c};--n:${40+(i*13)%35}%`;b.setAttribute('aria-pressed','false');b.setAttribute('aria-label',p.t);b.innerHTML=`<span>${p.e}</span>`;b.onclick=()=>abre(i);tubos.appendChild(b)});
+function abre(i){const p=proj[i];[...tubos.children].forEach((b,j)=>b.setAttribute('aria-pressed',i===j));$('#det').innerHTML=`<span class="tag" style="--c:${p.c}">${p.tag}</span><h3>${p.t}</h3><p>${p.d}</p>${p.l?`<a class="btn" href="${p.l}">ver código</a>`:''}`}
+$('#det').innerHTML='<p>👆 escolhe uma amostra pra ver o que tem dentro.</p>';
+/* jogo */
+const par={A:'T',T:'A',C:'G',G:'C'},cor={A:'#ffc9e0',T:'#ffc9e0',C:'#c6f1de',G:'#c6f1de'};
+let pts=0,rod=0,alvo,on=false,errou=false,rec=0;
+try{rec=+localStorage.getItem('taci-rec')||0}catch(e){}$('#rec').textContent=rec;
+['A','T','C','G'].forEach(b=>{const x=document.createElement('button');x.className='btn';x.textContent=b;x.style.background=cor[b];x.onclick=()=>resp(b);$('#opts').appendChild(x)});
+function nova(){alvo='ATCG'[Math.random()*4|0];errou=false;const a=$('#alvo');a.textContent=alvo;a.style.background=cor[alvo];$('#rod').textContent=rod+1}
+function resp(b){if(!on)return;const a=$('#alvo'),d=$('#dica');
+if(b===par[alvo]){if(!errou)pts++;rod++;$('#pts').textContent=pts;
+if(rod>=10){on=false;a.textContent='✿';a.style.background='#fff';$('#rod').textContent=10;
+d.textContent=pts>=8?`uau, ${pts} de 10 de primeira! você é craque 🧬`:`${pts} de 10 de primeira. Joga de novo, vai ficando fácil ♡`;
+$('#start').textContent='jogar de novo';
+if(pts>rec){rec=pts;$('#rec').textContent=rec;try{localStorage.setItem('taci-rec',rec)}catch(e){}}return}
+d.textContent='acertou! 🎉';nova()}
+else{errou=true;a.classList.remove('err');void a.offsetWidth;a.classList.add('err');d.textContent=`quase! ${alvo} combina com ${par[alvo]}. Tenta de novo 💪`}}
+$('#start').onclick=()=>{pts=0;rod=0;on=true;$('#pts').textContent=0;$('#dica').textContent='clica na letra que combina!';$('#start').textContent='recomeçar';nova()};
+/* mural */
+const mural=$('#mural');
+const cores=['#ffc9e0','#c6f1de','#dccbff','#ffd9bd','#c9e6ff','#fff3a8'];let posts=[];
+try{posts=JSON.parse(localStorage.getItem('taci-posts')||'[]')}catch(e){}
+if(!posts.length)posts=[{t:'oi! deixa um recado ♡',x:20,y:20,c:0},{t:'arrasta eu ✿',x:190,y:70,c:2}];
+const salva=()=>{try{localStorage.setItem('taci-posts',JSON.stringify(posts))}catch(e){}};
+function desenha(){mural.innerHTML='';posts.forEach((p,i)=>{const d=document.createElement('div');d.className='pit';d.textContent=p.t;d.style.cssText=`left:${p.x}px;top:${p.y}px;background:${cores[p.c]};transform:rotate(${(i%5)-2}deg)`;
+d.onpointerdown=e=>{e.stopPropagation();d.setPointerCapture(e.pointerId);const ox=e.clientX-p.x,oy=e.clientY-p.y;
+d.onpointermove=m=>{p.x=Math.max(0,Math.min(mural.clientWidth-140,m.clientX-ox));p.y=Math.max(0,Math.min(mural.clientHeight-110,m.clientY-oy));d.style.left=p.x+'px';d.style.top=p.y+'px'};
+d.onpointerup=()=>{d.onpointermove=null;salva()}};mural.appendChild(d)})}
+$('#addp').onclick=()=>{const v=$('#txt').value.trim();if(!v)return;posts.push({t:v,x:10+Math.random()*(mural.clientWidth-160),y:10+Math.random()*180,c:Math.random()*6|0});$('#txt').value='';salva();desenha()};
+$('#txt').onkeydown=e=>{if(e.key==='Enter')$('#addp').click()};
+$('#limpa').onclick=()=>{posts=[];salva();desenha()};
+desenha();
 </script>
 </body>
 </html>
